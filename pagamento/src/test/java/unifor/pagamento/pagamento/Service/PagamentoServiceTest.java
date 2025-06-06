@@ -8,7 +8,7 @@ import org.mockito.MockitoAnnotations;
 import unifor.pagamento.pagamento.model.Pagamento;
 import unifor.pagamento.pagamento.model.FormaDePagamento;
 import unifor.pagamento.pagamento.model.StatusPagamento;
-import unifor.pagamento.pagamento.repository.PagamamentoRepository;
+import unifor.pagamento.pagamento.repository.PagamentoRepository;
 import unifor.pagamento.pagamento.exception.PagamentoException;
 
 import java.math.BigDecimal;
@@ -23,7 +23,7 @@ import static org.mockito.Mockito.*;
 class PagamentoServiceTest {
 
     @Mock
-    private PagamamentoRepository pagamentoRepository;
+    private PagamentoRepository pagamentoRepository;
 
     @InjectMocks
     private PagamentoService pagamentoService;
