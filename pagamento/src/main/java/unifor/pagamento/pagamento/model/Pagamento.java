@@ -37,6 +37,9 @@ public class Pagamento {
     @Column(nullable = false)
     private String cpfCliente;
 
+    @Column(name = "id_usuario", nullable = false)
+    private Long idUsuario;
+
     // Método para processar um novo pagamento
     public void processarPagamento(BigDecimal valor, FormaDePagamento formaPagamento, Long idPedido, String nomeCliente, String cpfCliente) {
         this.valor = valor;

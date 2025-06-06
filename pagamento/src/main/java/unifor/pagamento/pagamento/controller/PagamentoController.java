@@ -20,19 +20,19 @@ public class PagamentoController {
    
     //  criar um novo pagamento
     @PostMapping
-    public ResponseEntity<?> criarPagamento(@RequestBody PagamentoRequest request) {
-        try {
-            Pagamento pagamento = pagamentoService.criarPagamento(
-                request.getValor(),
-                request.getFormaPagamento(),
-                request.getIdPedido(),
-                request.getNomeCliente(),
-                request.getCpfCliente()
-            );
-            return ResponseEntity.ok(pagamento);
-        } catch (Exception e) {
-            return ResponseEntity.status(500).body(new ErrorResponse(500, e.getMessage()));
+    public ResponseEntity<Pagamento> criarPagamento(@RequestBody Pagamento pagamento) {
+        if (pagamento.getIdUsuario() == null) {
+            return ResponseEntity.badRequest().build();
         }
+        Pagamento novoPagamento = pagamentoService.criarPagamento(
+            pagamento.getValor(),
+            pagamento.getFormaPagamento(),
+            pagamento.getIdPedido(),
+            pagamento.getNomeCliente(),
+            pagamento.getCpfCliente(),
+            pagamento.getIdUsuario()
+        );
+        return ResponseEntity.ok(novoPagamento);
     }
 
     // Buscar um pagamento por ID
@@ -124,5 +124,10 @@ public class PagamentoController {
         public long getTimestamp() { return timestamp; }
         @SuppressWarnings("unused")
         public void setTimestamp(long timestamp) { this.timestamp = timestamp; }
+    }
+
+    @GetMapping("/usuario/{idUsuario}")
+    public ResponseEntity<List<Pagamento>> buscarPorIdUsuario(@PathVariable Long idUsuario) {
+        return ResponseEntity.ok(pagamentoService.buscarPorIdUsuario(idUsuario));
     }
 }

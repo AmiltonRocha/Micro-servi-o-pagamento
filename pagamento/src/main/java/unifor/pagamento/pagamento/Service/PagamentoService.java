@@ -17,7 +17,7 @@ public class PagamentoService {
 
     // Método para criar um novo pagamento
     public Pagamento criarPagamento(BigDecimal valor, FormaDePagamento formaPagamento, 
-                                  Long idPedido, String nomeCliente, String cpfCliente) {
+                                  Long idPedido, String nomeCliente, String cpfCliente, Long idUsuario) {
         try {
             if (valor == null || valor.compareTo(BigDecimal.ZERO) <= 0) {
                 throw new PagamentoException("Valor deve ser maior que zero");
@@ -36,7 +36,13 @@ public class PagamentoService {
             }
 
             Pagamento pagamento = new Pagamento();
-            pagamento.processarPagamento(valor, formaPagamento, idPedido, nomeCliente, cpfCliente);
+            pagamento.setValor(valor);
+            pagamento.setFormaPagamento(formaPagamento);
+            pagamento.setIdPedido(idPedido);
+            pagamento.setNomeCliente(nomeCliente);
+            pagamento.setCpfCliente(cpfCliente);
+            pagamento.setIdUsuario(idUsuario);
+            pagamento.setStatus(StatusPagamento.PENDENTE);
             return pagamentoRepository.save(pagamento);
         } catch (Exception e) {
             throw new PagamentoException("Erro ao criar pagamento: " + e.getMessage());
@@ -67,6 +73,11 @@ public class PagamentoService {
     // Método para buscar pagamentos por ID do pedido
     public List<Pagamento> buscarPorIdPedido(Long idPedido) {
         return pagamentoRepository.findByIdPedido(idPedido);
+    }
+
+    // Método para buscar pagamentos por ID do usuário
+    public List<Pagamento> buscarPorIdUsuario(Long idUsuario) {
+        return pagamentoRepository.findByIdUsuario(idUsuario);
     }
 
     // Método para aprovar um pagamento
