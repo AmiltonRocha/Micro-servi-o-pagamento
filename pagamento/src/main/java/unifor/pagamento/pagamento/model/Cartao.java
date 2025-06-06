@@ -3,10 +3,14 @@ package unifor.pagamento.pagamento.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Data
 @Entity
 @Table(name = "cartoes")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Cartao {
     
     @Id
@@ -34,5 +38,21 @@ public class Cartao {
     private String cpfTitular;
 
     @Column(name = "id_usuario", nullable = false)
+    @JsonProperty(value = "idUsuario", required = true)
+    @JsonInclude(JsonInclude.Include.ALWAYS)
     private Long idUsuario;
+
+    @Override
+    public String toString() {
+        return "Cartao{" +
+                "id=" + id +
+                ", numeroCartao='" + numeroCartao + '\'' +
+                ", nomeTitular='" + nomeTitular + '\'' +
+                ", dataValidade='" + dataValidade + '\'' +
+                ", cvv='" + cvv + '\'' +
+                ", tipoCartao=" + tipoCartao +
+                ", cpfTitular='" + cpfTitular + '\'' +
+                ", idUsuario=" + idUsuario +
+                '}';
+    }
 } 

@@ -22,8 +22,12 @@ public class CartaoController {
         if (cartao.getIdUsuario() == null) {
             return ResponseEntity.badRequest().build();
         }
-        Cartao novoCartao = cartaoRepository.save(cartao);
-        return ResponseEntity.ok(novoCartao);
+        try {
+            Cartao novoCartao = cartaoRepository.save(cartao);
+            return ResponseEntity.ok(novoCartao);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     // Buscar todos os cartões
@@ -61,8 +65,7 @@ public class CartaoController {
         return cartaoRepository.findById(id)
                 .map(_ -> {
                     cartaoAtualizado.setId(id);
-                    Cartao cartaoSalvo = cartaoRepository.save(cartaoAtualizado);
-                    return ResponseEntity.ok(cartaoSalvo);
+                    return ResponseEntity.ok(cartaoRepository.save(cartaoAtualizado));
                 })
                 .orElse(ResponseEntity.notFound().build());
     }

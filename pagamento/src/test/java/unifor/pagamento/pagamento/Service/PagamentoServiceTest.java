@@ -46,7 +46,7 @@ class PagamentoServiceTest {
         when(pagamentoRepository.save(any(Pagamento.class))).thenReturn(pagamentoEsperado);
 
         // Act
-        Pagamento resultado = pagamentoService.criarPagamento(valor, formaPagamento, idPedido, nomeCliente, cpfCliente);
+        Pagamento resultado = pagamentoService.criarPagamento(valor, formaPagamento, idPedido, nomeCliente, cpfCliente, 123L);
 
         // Assert
         assertNotNull(resultado);
