@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository; // Anotação para indicar que
 import unifor.pagamento.pagamento.model.Pagamento;
 import unifor.pagamento.pagamento.model.StatusPagamento;
 import java.util.List;
-import java.util.Optional;
+
 
 @Repository
 public interface PagamentoRepository extends JpaRepository<Pagamento, Long> {

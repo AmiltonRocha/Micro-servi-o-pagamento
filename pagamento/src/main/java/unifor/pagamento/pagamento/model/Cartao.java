@@ -38,7 +38,7 @@ public class Cartao {
     private String cpfTitular;
 
     @Column(name = "id_usuario", nullable = false)
-    @JsonProperty(value = "idUsuario", required = true)
+    @JsonProperty("idUsuario")
     @JsonInclude(JsonInclude.Include.ALWAYS)
     private Long idUsuario;
 
