@@ -8,7 +8,6 @@ import unifor.pagamento.pagamento.model.StatusPagamento;  // Enum de status
 import unifor.pagamento.pagamento.Service.PagamentoService;  // Nosso service que criamos
   // Para valores monetários
 import java.util.List;        // Para listas de pagamentos
-import unifor.pagamento.pagamento.dto.PagamentoAcaoRequest;
 
 @RestController
 @RequestMapping("/api/pagamentos")
@@ -68,21 +67,21 @@ public class PagamentoController {
 
     // Aprovar um pagamento
     @PutMapping("/{id}/aprovar")
-    public ResponseEntity<Pagamento> aprovarPagamento(@PathVariable Long id, @RequestBody(required = false) PagamentoAcaoRequest request) {
+    public ResponseEntity<Pagamento> aprovarPagamento(@PathVariable Long id) {
         Pagamento pagamento = pagamentoService.aprovarPagamento(id);
         return ResponseEntity.ok(pagamento);
     }
 
     // Rejeitar um pagamento
     @PutMapping("/{id}/rejeitar")
-    public ResponseEntity<Pagamento> rejeitarPagamento(@PathVariable Long id, @RequestBody(required = false) PagamentoAcaoRequest request) {
+    public ResponseEntity<Pagamento> rejeitarPagamento(@PathVariable Long id) {
         Pagamento pagamento = pagamentoService.rejeitarPagamento(id);
         return ResponseEntity.ok(pagamento);
     }
 
     // Cancelar um pagamento
     @PutMapping("/{id}/cancelar")
-    public ResponseEntity<Pagamento> cancelarPagamento(@PathVariable Long id, @RequestBody(required = false) PagamentoAcaoRequest request) {
+    public ResponseEntity<Pagamento> cancelarPagamento(@PathVariable Long id) {
         Pagamento pagamento = pagamentoService.cancelarPagamento(id);
         return ResponseEntity.ok(pagamento);
     }
