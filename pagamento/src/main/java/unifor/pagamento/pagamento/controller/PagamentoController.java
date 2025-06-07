@@ -11,6 +11,7 @@ import java.util.List;        // Para listas de pagamentos
 
 @RestController
 @RequestMapping("/api/pagamentos")
+@CrossOrigin(origins = "http://localhost:3000") // Permite requisições do frontend React
 public class PagamentoController {
     
     @Autowired

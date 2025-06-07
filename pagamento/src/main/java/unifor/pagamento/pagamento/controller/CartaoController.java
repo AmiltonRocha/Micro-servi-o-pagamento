@@ -11,6 +11,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/cartoes")
+@CrossOrigin(origins = "http://localhost:3000")
 public class CartaoController {
 
     @Autowired
