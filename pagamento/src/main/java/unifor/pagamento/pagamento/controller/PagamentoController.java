@@ -8,7 +8,6 @@ import unifor.pagamento.pagamento.model.StatusPagamento;  // Enum de status
 import unifor.pagamento.pagamento.Service.PagamentoService;  // Nosso service que criamos
   // Para valores monetários
 import java.util.List;        // Para listas de pagamentos
-import unifor.pagamento.pagamento.dto.PagamentoRequest;
 import unifor.pagamento.pagamento.dto.PagamentoAcaoRequest;
 
 @RestController
@@ -97,33 +96,6 @@ public class PagamentoController {
     @GetMapping("/pedido/{idPedido}")
     public List<Pagamento> buscarPorIdPedido(@PathVariable Long idPedido) {
         return pagamentoService.buscarPorIdPedido(idPedido);
-    }
-
-    // Classe para representar erros
-    private static class ErrorResponse {
-        private int status;
-        private String mensagem;
-        private long timestamp;
-
-        public ErrorResponse(int status, String mensagem) {
-            this.status = status;
-            this.mensagem = mensagem;
-            this.timestamp = System.currentTimeMillis();
-        }
-
-        // Getters e Setters
-        @SuppressWarnings("unused")
-        public int getStatus() { return status; }
-        @SuppressWarnings("unused")
-        public void setStatus(int status) { this.status = status; }
-        @SuppressWarnings("unused")
-        public String getMensagem() { return mensagem; }
-        @SuppressWarnings("unused")
-        public void setMensagem(String mensagem) { this.mensagem = mensagem; }
-        @SuppressWarnings("unused")
-        public long getTimestamp() { return timestamp; }
-        @SuppressWarnings("unused")
-        public void setTimestamp(long timestamp) { this.timestamp = timestamp; }
     }
 
     @GetMapping("/usuario/{idUsuario}")
