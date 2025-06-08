@@ -33,21 +33,18 @@ public class GlobalExceptionHandler {
     // Classe para formatar a resposta de erro
     private static class ErroResponse {
         private int status;
-        private String mensagem;
+        private String message;
         private long timestamp;
 
-        public ErroResponse(int status, String mensagem, long timestamp) {
+        public ErroResponse(int status, String message, long timestamp) {
             this.status = status;
-            this.mensagem = mensagem;
+            this.message = message;
             this.timestamp = timestamp;
         }
 
         // Getters
-        @SuppressWarnings("unused")
         public int getStatus() { return status; }
-        @SuppressWarnings("unused")
-        public String getMensagem() { return mensagem; }
-        @SuppressWarnings("unused")
+        public String getMessage() { return message; }
         public long getTimestamp() { return timestamp; }
     }
 } 

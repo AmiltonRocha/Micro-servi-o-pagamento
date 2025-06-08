@@ -1,7 +1,6 @@
 package unifor.pagamento.pagamento.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -23,9 +22,8 @@ public class Cartao {
     @Column(nullable = false)
     private String nomeTitular;
 
-    @Column(nullable = false, length = 5)
-    @Pattern(regexp = "^(0[1-9]|1[0-2])/([0-9]{2})$", message = "Data de validade deve estar no formato MM/YY")
-    private String dataValidade;
+    @Column(nullable = false, length = 4)
+    private String dataValidade; // MMYY
 
     @Column(nullable = false)
     private String cvv;
@@ -41,6 +39,20 @@ public class Cartao {
     @JsonProperty("idUsuario")
     @JsonInclude(JsonInclude.Include.ALWAYS)
     private Long idUsuario;
+
+    @PrePersist
+    @PreUpdate
+    private void validateFields() {
+        if (!numeroCartao.matches("\\d{16}")) {
+            throw new IllegalArgumentException("O número do cartão deve conter 16 dígitos numéricos.");
+        }
+        if (!cpfTitular.matches("\\d{11}")) {
+            throw new IllegalArgumentException("O CPF deve conter 11 dígitos numéricos.");
+        }
+        if (!dataValidade.matches("\\d{4}")) {
+            throw new IllegalArgumentException("A data de validade deve estar no formato MMYY (apenas números).");
+        }
+    }
 
     @Override
     public String toString() {
