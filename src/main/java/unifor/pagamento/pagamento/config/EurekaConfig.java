@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Primary;
 import org.springframework.cloud.commons.util.InetUtils;
 import org.springframework.cloud.commons.util.InetUtilsProperties;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 
 @Configuration
 public class EurekaConfig {
@@ -18,22 +19,26 @@ public class EurekaConfig {
 
     @Bean
     @LoadBalanced
+    @ConditionalOnMissingBean
     public RestTemplate restTemplate() {
         return new RestTemplate();
     }
 
     @Bean
     @Primary
+    @ConditionalOnMissingBean
     public EurekaInstanceConfigBean eurekaInstanceConfigBean(InetUtils inetUtils) {
         EurekaInstanceConfigBean config = new EurekaInstanceConfigBean(inetUtils);
         config.setHostname(hostname);
         config.setPreferIpAddress(false);
         config.setNonSecurePortEnabled(true);
         config.setSecurePortEnabled(false);
+        config.setInstanceId(hostname + ":" + System.currentTimeMillis());
         return config;
     }
 
     @Bean
+    @ConditionalOnMissingBean
     public InetUtils inetUtils() {
         return new InetUtils(new InetUtilsProperties());
     }
