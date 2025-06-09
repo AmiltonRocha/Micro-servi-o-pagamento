@@ -14,7 +14,12 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/cartoes")
-@CrossOrigin(origins = "http://localhost:5173") // Ajuste a origem conforme seu frontend
+@CrossOrigin(origins = {
+    "http://localhost:5173",
+    "http://localhost:5174",
+    "http://localhost:3000",
+    "https://ser-ovenda-production.up.railway.app"
+})
 public class CartaoController {
 
     @Autowired
