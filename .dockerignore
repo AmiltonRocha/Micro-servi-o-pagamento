@@ -1,0 +1,25 @@
+# Arquivos do Git
+.git
+.gitignore
+
+# Arquivos do Maven
+target/
+!target/*.jar
+.mvn/
+mvnw
+mvnw.cmd
+
+# Arquivos do IDE
+.idea/
+*.iml
+.vscode/
+.project
+.classpath
+.settings/
+
+# Arquivos de log
+*.log
+
+# Arquivos do sistema
+.DS_Store
+Thumbs.db 
